@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Abdirahman Mohamed — Software Engineer</title>
+<meta name="description" content="Software engineer in Portland, ME. Builder of IlmQuest, NoorHub, and the Al Bayaan Institute website. B.S. Computer Science, University of Southern Maine." />
+<meta name="theme-color" content="#0B0F19" />
+
+<meta property="og:title" content="Abdirahman Mohamed — Software Engineer" />
+<meta property="og:description" content="Full-stack software for real users: IlmQuest, NoorHub, Al Bayaan Institute, Motion Drivers Ed, Bet on Me." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:           #253254;
+    --bg-elev:      #0F1421;
+    --card:         #111827;
+    --card-hover:   #151c2e;
+    --primary:      #22C55E;
+    --secondary:    #3B82F6;
+    --text:         #F9FAFB;
+    --text-muted:   #9CA3AF;
+    --text-dim:     #6B7280;
+    --border:       rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --radius:       14px;
+    --radius-lg:    18px;
+    --max:          1140px;
+    --pad:          clamp(20px, 4vw, 36px);
+    --font-sans:    "Geist", ui-sans-serif, system-ui, sans-serif;
+    --font-mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  ::selection { background: var(--primary); color: var(--bg); }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(60% 40% at 80% -10%, rgba(59, 130, 246, 0.06), transparent 60%),
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(211, 17, 17, 0.018) 1px, transparent 1px);
+    background-size: 100% 100%, 64px 64px, 64px 64px;
+    pointer-events: none;
+    z-index: 0;
+  } 
+  header{
+    background: var(--bg);
+  }
+  main, header, footer { position: relative; z-index: 1; }
+
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+  .section { padding: clamp(56px, 9vw, 100px) 0; }
+  .section-head { margin-bottom: clamp(32px, 5vw, 48px); }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .section-title {
+    font-size: clamp(26px, 3.6vw, 38px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 12px 0 0;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 12px 0 0;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: rgba(11, 15, 25, 0.72);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .nav.scrolled { border-bottom-color: var(--border); }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .brand { font-family: var(--font-mono); font-size: 14px; color: var(--text); }
+  .brand b { color: var(--primary); font-weight: 500; }
+  .nav-links {
+    display: flex; gap: 26px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    padding: 7px 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    transition: border-color 0.15s ease;
+  }
+  .nav-cta:hover { border-color: var(--border-strong); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { padding: clamp(56px, 9vw, 96px) 0 clamp(40px, 6vw, 72px); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero-loc { font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    margin: 18px 0 0;
+    max-width: 14ch;
+  }
+  .hero-sub {
+    margin: 22px 0 0;
+    font-size: clamp(15px, 1.4vw, 17px);
+    color: var(--text-muted);
+    max-width: 540px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+  .hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--primary); color: var(--bg); }
+  .btn-primary:hover { background: #29d268; }
+  .btn-ghost {
+    background: rgba(255,255,255,0.02);
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
+
+  /* "Currently" panel — real concurrent roles */
+  .now {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    overflow: hidden;
+  }
+  .now-head {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .now-head .key { color: var(--primary); }
+  .now-row {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .now-row:last-child { border-bottom: none; }
+  .now-row .when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .now-row .what { margin-top: 4px; font-size: 15px; color: var(--text); font-weight: 500; }
+  .now-row .role { margin-top: 2px; font-size: 13px; color: var(--text-muted); }
+
+  /* METRIC BAR */
+  .bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 26px 0;
+  }
+  .bar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 920px) {
+    .bar-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+  .bar-item { padding: 0 16px; border-left: 1px solid var(--border); }
+  .bar-item:first-child { border-left: none; }
+  @media (max-width: 920px) { .bar-item:nth-child(odd) { border-left: none; } }
+  .bar-num {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .bar-num small { color: var(--primary); font-size: 14px; margin-left: 2px; font-weight: 400; }
+  .bar-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.45;
+  }
+
+  /* PROJECTS */
+  .projects { display: grid; gap: 22px; }
+  .project {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    overflow: hidden;
+    transition: border-color 0.18s ease;
+  }
+  .project:hover { border-color: var(--border-strong); }
+  .project-grid { display: grid; grid-template-columns: 1.4fr 1fr; }
+  @media (max-width: 880px) { .project-grid { grid-template-columns: 1fr; } }
+
+  .project-content {
+    padding: clamp(26px, 3.6vw, 40px);
+    display: flex; flex-direction: column;
+  }
+  .project-tag { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; }
+  .project-title {
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin: 8px 0 4px;
+    line-height: 1.15;
+  }
+  .project-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 18px; }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text-muted);
+  }
+  .highlights {
+    list-style: none; padding: 0;
+    margin: 0 0 22px;
+    display: grid; gap: 9px;
+  }
+  .highlights li {
+    font-size: 14px;
+    color: var(--text-muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .highlights li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 8px; height: 1px;
+    background: var(--text-dim);
+  }
+  .project-actions { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color 0.15s ease, border-color 0.15s ease;
+    font-family: var(--font-mono);
+  }
+  .link-btn:hover { color: var(--text); border-color: var(--border-strong); }
+  .link-btn svg { width: 14px; height: 14px; }
+
+  .project-meta {
+    border-left: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: clamp(26px, 3.6vw, 40px);
+    display: flex; flex-direction: column;
+    gap: 14px;
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 880px) {
+    .project-meta { border-left: none; border-top: 1px solid var(--border); }
+  }
+  .meta-row {
+    display: grid; grid-template-columns: 80px 1fr; gap: 12px;
+    font-size: 13px;
+  }
+  .meta-row dt { color: var(--text-dim); }
+  .meta-row dd { color: var(--text); margin: 0; }
+
+  /* TECH STACK */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .stack-cat {
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .stack-cat h3 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .stack-cat ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+  .stack-cat li { font-size: 14px; color: var(--text); padding: 4px 0; }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    padding: clamp(28px, 4.5vw, 48px);
+  }
+  .phil-quote {
+    font-size: clamp(19px, 2.1vw, 24px);
+    line-height: 1.45;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    max-width: 720px;
+    margin: 0;
+  }
+  .phil-quote .accent { color: var(--primary); }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item { position: relative; padding-bottom: 32px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -24px; top: 7px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--text-dim);
+  }
+  .tl-item.current::before { border-color: var(--primary); }
+  .tl-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .tl-title { font-size: 18px; font-weight: 500; margin: 6px 0 4px; letter-spacing: -0.015em; }
+  .tl-role { color: var(--text-muted); font-size: 13px; margin-bottom: 12px; font-family: var(--font-mono); }
+  .tl-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 6px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .tl-list li { padding-left: 18px; position: relative; line-height: 1.55; }
+  .tl-list li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 8px; height: 1px;
+    background: var(--text-dim);
+  }
+
+  /* CONTACT */
+  .contact {
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(40px, 6vw, 72px) clamp(24px, 4vw, 40px);
+    background: var(--card);
+  }
+  .contact h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 12px 0 14px;
+  }
+  .contact h2 .accent { color: var(--primary); }
+  .contact p {
+    color: var(--text-muted);
+    max-width: 460px;
+    margin: 0 auto 28px;
+    font-size: 15px;
+  }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0 32px;
+    margin-top: 56px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand">abdirahman<b>.</b>dev</a>
+    <nav class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-loc">Software Engineer · Portland, ME</div>
+      <h1>Abdirahman Mohamed.</h1>
+      <p class="hero-sub">I build software that people use the next morning. Founder of <strong>Al Bayaan Institute</strong>, a community education program I grew from 3 to 110+ students, and the engineer behind the platforms it runs on. B.S. Computer Science, University of Southern Maine.</p>
+      <div class="hero-actions"><a href="#projects" class="btn btn-primary">View projects</a><a href="#contact" class="btn btn-ghost">Get in touch</a></div>
+    </div>
+    <aside class="now" aria-label="Currently">
+      <div class="now-head"><span><span class="key">~/</span>currently</span><span>2 roles</span></div>
+      <div>
+        <div class="now-row"><div class="when">SEP 2024 → PRESENT</div><div class="what">Al Bayaan Institute</div><div class="role">Founder &amp; Lead Instructor</div></div>
+        <div class="now-row"><div class="when">SEP 2025 → PRESENT</div><div class="what">Freelance</div><div class="role">Web Developer · Portland, ME</div></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="bar">
+  <div class="container bar-grid">
+    <div class="bar-item"><div class="bar-num">110<small>+</small></div><div class="bar-label">Students at Al Bayaan, grown from 3</div></div>
+    <div class="bar-item"><div class="bar-num">70<small>%</small></div><div class="bar-label">Less admin work after IlmQuest</div></div>
+    <div class="bar-item"><div class="bar-num">80<small>%</small></div><div class="bar-label">Less manual data entry</div></div>
+    <div class="bar-item"><div class="bar-num">248</div><div class="bar-label">Automated checks guarding IlmQuest</div></div>
+    <div class="bar-item"><div class="bar-num">1,700<small>+</small></div><div class="bar-label">Commits to IlmQuest</div></div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-head reveal"><div class="eyebrow">// projects</div><h2 class="section-title">Things I've built and shipped.</h2></div>
+    <div class="projects">
+      <article class="project reveal">
+        <div class="project-grid">
+          <div class="project-content">
+            <span class="project-tag">01</span>
+            <h3 class="project-title">IlmQuest</h3>
+            <p class="project-sub">Multi-tenant school operations platform</p>
+            <div class="stack-tags"><span class="stack-tag">Node.js</span><span class="stack-tag">Express</span><span class="stack-tag">MongoDB</span><span class="stack-tag">EJS</span><span class="stack-tag">Next.js</span><span class="stack-tag">React Native</span><span class="stack-tag">Stripe</span><span class="stack-tag">Socket.io</span><span class="stack-tag">Docker</span></div>
+            <ul class="highlights"><li>Tenant isolation by school and role-based access for admins, teachers, students, and parents across 70 data models.</li><li>Grading, attendance, Qur'an memorization tracking, messaging, and PDF reports in daily use at Al Bayaan Institute.</li><li>Stripe billing with webhooks and reconciliation, plus SMS, email, and push notifications.</li><li>248 automated checks and Playwright end-to-end tests in GitHub Actions CI; deployed in Docker on Railway with Sentry.</li></ul>
+            <div class="project-actions"><a class="link-btn primary" href="https://www.theilmquest.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a> <span class="link-btn" style="cursor:default;opacity:.75">Source private</span></div>
+          </div>
+          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Production platform</dd></div><div class="meta-row"><dt>users</dt><dd>Admins · Teachers · Students · Parents</dd></div><div class="meta-row"><dt>testing</dt><dd>248 checks · Playwright</dd></div><div class="meta-row"><dt>ci</dt><dd>GitHub Actions</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">In production</span></dd></div></dl>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-grid">
+          <div class="project-content">
+            <span class="project-tag">02</span>
+            <h3 class="project-title">Al Bayaan Institute Website</h3>
+            <p class="project-sub">Public website for a community education program</p>
+            <div class="stack-tags"><span class="stack-tag">React</span><span class="stack-tag">Vite</span><span class="stack-tag">Tailwind CSS</span><span class="stack-tag">shadcn/ui</span><span class="stack-tag">Vercel</span></div>
+            <ul class="highlights"><li>Public site for programs, curriculum levels, academic calendar, enrollment, donations, and contact.</li><li>Responsive, accessible component system built on Tailwind CSS and shadcn/ui.</li><li>Deployed on Vercel with the institute's custom domain.</li></ul>
+            <div class="project-actions"><a class="link-btn primary" href="https://www.albayaaninstitute.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a></div>
+          </div>
+          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Organization website</dd></div><div class="meta-row"><dt>audience</dt><dd>Families · Community</dd></div><div class="meta-row"><dt>hosting</dt><dd>Vercel</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-grid">
+          <div class="project-content">
+            <span class="project-tag">03</span>
+            <h3 class="project-title">NoorHub</h3>
+            <p class="project-sub">Gamified missions and rewards app for students</p>
+            <div class="stack-tags"><span class="stack-tag">TanStack Start</span><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">MongoDB</span><span class="stack-tag">Tailwind CSS</span></div>
+            <ul class="highlights"><li>Rank-gated missions in knowledge, Qur'an, character, and physical categories that students submit for teacher review.</li><li>In-app currency, a snack-shop store, and class leaderboards that reward effort and consistency.</li><li>Session auth with CSRF protection, server API routes on MongoDB, and 41 automated test files.</li></ul>
+            <div class="project-actions"><span class="link-btn" style="cursor:default;opacity:.75">Internal tool · private</span></div>
+          </div>
+          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Internal tool</dd></div><div class="meta-row"><dt>users</dt><dd>Students · Teachers</dd></div><div class="meta-row"><dt>stack</dt><dd>TanStack · Mongo</dd></div><div class="meta-row"><dt>tests</dt><dd>41 test files</dd></div><div class="meta-row"><dt>status</dt><dd>Used at Al Bayaan</dd></div></dl>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-grid">
+          <div class="project-content">
+            <span class="project-tag">04</span>
+            <h3 class="project-title">Motion Drivers Ed</h3>
+            <p class="project-sub">Website for a Lewiston, ME driving school</p>
+            <div class="stack-tags"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span class="stack-tag">JavaScript</span><span class="stack-tag">SEO</span></div>
+            <ul class="highlights"><li>Responsive, mobile-first site for a local driving school with clear course and road-test information.</li><li>Modular components and CSS animations with consistent branding.</li><li>Search-optimized metadata and sitemap for local discovery.</li></ul>
+            <div class="project-actions"><a class="link-btn primary" href="https://motiondriversed.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a> <a class="link-btn" href="https://github.com/abdirxhmxn/motionDriversEd" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.240-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg> Source</a></div>
+          </div>
+          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Client website</dd></div><div class="meta-row"><dt>stack</dt><dd>Vanilla JS</dd></div><div class="meta-row"><dt>focus</dt><dd>SEO · mobile</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-grid">
+          <div class="project-content">
+            <span class="project-tag">05</span>
+            <h3 class="project-title">Bet on Me</h3>
+            <p class="project-sub">Team project · DevOps &amp; project management</p>
+            <div class="stack-tags"><span class="stack-tag">EJS</span><span class="stack-tag">Node.js</span><span class="stack-tag">Passport.js</span><span class="stack-tag">MongoDB</span><span class="stack-tag">Git</span></div>
+            <ul class="highlights"><li>Group habit-building app: members join clusters, set habit goals and deadlines, and stake points on following through.</li><li>Served as DevOps PM: owned the deployment pipeline and the team's Git workflow.</li><li>Enforced branching conventions, reviewed pull requests, and resolved merge conflicts for the team.</li></ul>
+            <div class="project-actions"><a class="link-btn" href="https://github.com/Resilient-Labs/bet-on-me" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.240-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg> Source</a></div>
+          </div>
+          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Team project</dd></div><div class="meta-row"><dt>role</dt><dd>DevOps PM</dd></div><div class="meta-row"><dt>stack</dt><dd>EJS · Passport · Mongo</dd></div><div class="meta-row"><dt>where</dt><dd>Resilient Coders</dd></div></dl>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <div class="section-head reveal"><div class="eyebrow">// stack</div><h2 class="section-title">What I work with</h2></div>
+    <div class="stack-grid reveal">
+      <div class="stack-cat"><h3>Languages</h3><ul><li>JavaScript (ES6+)</li><li>TypeScript</li><li>Python</li><li>Java</li><li>HTML &amp; CSS</li></ul></div>
+      <div class="stack-cat"><h3>Frameworks</h3><ul><li>Node.js &amp; Express</li><li>React &amp; Next.js</li><li>React Native (Expo)</li><li>TanStack Start</li><li>Tailwind CSS</li></ul></div>
+      <div class="stack-cat"><h3>Data &amp; APIs</h3><ul><li>MongoDB &amp; Mongoose</li><li>REST APIs</li><li>Stripe</li><li>Socket.io</li><li>Google Apps Script</li></ul></div>
+      <div class="stack-cat"><h3>Tools &amp; Practices</h3><ul><li>GitHub Actions CI</li><li>Playwright</li><li>Docker · Railway · Vercel</li><li>Sentry</li><li>Claude Code</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-head reveal"><div class="eyebrow">// experience</div><h2 class="section-title">Where I've been working</h2></div>
+    <div class="timeline reveal">
+      <div class="tl-item current"><div class="tl-meta">SEP 2024 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Al Bayaan Institute</h3><div class="tl-role">Founder &amp; Lead Instructor</div><ul class="tl-list"><li>Founded and grew a community education program from 3 to 110+ students.</li><li>Train and onboard staff on procedures and technology, including IlmQuest and NoorHub.</li><li>Replaced paper and spreadsheet grading with IlmQuest, cutting administrative workload by about 70%.</li></ul></div>
+      <div class="tl-item current"><div class="tl-meta">SEP 2025 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Freelance</h3><div class="tl-role">Web Developer</div><ul class="tl-list"><li>Built and deployed motiondriversed.com for a Lewiston, ME driving school.</li><li>Built booking-site prototypes for local businesses with Next.js, Prisma, and Stripe.</li></ul></div>
+      <div class="tl-item"><div class="tl-meta">AUG 2025 — DEC 2025 · REMOTE</div><h3 class="tl-title">Resilient Coders</h3><div class="tl-role">Full-Stack Software Engineer · nonprofit software engineering program</div><ul class="tl-list"><li>Built MERN-stack applications in Agile sprints, including JWT-authenticated REST APIs and reusable React components.</li><li>Reviewed 10+ teammate pull requests; DevOps PM on Bet on Me.</li></ul></div>
+      <div class="tl-item"><div class="tl-meta">FEB 2024 — AUG 2024 · PORTLAND, ME</div><h3 class="tl-title">Northeast Residential Services</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Supported clients under individualized care plans; kept accurate documentation and administered medications under strict procedures.</li></ul></div>
+      <div class="tl-item"><div class="tl-meta">SEP 2021 — AUG 2022</div><h3 class="tl-title">Creative Works</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Provided direct support to individuals following their support plans while studying computer science.</li></ul></div>
+      <div class="tl-item"><div class="tl-meta">MAY 2025 · PORTLAND, ME</div><h3 class="tl-title">University of Southern Maine</h3><div class="tl-role">B.S. Computer Science</div><ul class="tl-list"><li>Coursework: Data Structures, Algorithms, Operating Systems, Artificial Intelligence, Systems Programming, Web Development.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact reveal">
+      <div class="eyebrow">// contact</div>
+      <h2>Let's <span class="accent">work together.</span></h2>
+      <p>Open to software engineering roles and mission-driven work.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:work.amohamed@gmail.com">work.amohamed@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/abdirxhmxn" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.240-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg> GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/mcabdirxhmxn" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.850 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg> LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="container footer-inner"><span>© <span id="year"></span> Abdirahman Mohamed</span><span>Portland, ME</span></div></footer>
+
+<script>
+(function nav(){const n=document.getElementById('nav');const f=()=>n.classList.toggle('scrolled',window.scrollY>8);document.addEventListener('scroll',f,{passive:true});f();})();
+(function reveal(){const els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});els.forEach(e=>io.observe(e));})();
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
