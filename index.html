@@ -452,6 +452,32 @@
     .reveal { opacity: 1; transform: none; transition: none; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+  /* PROJECT HOMEPAGE PREVIEW (auto-scroll) */
+  .project-side { display: flex; flex-direction: column; background: var(--bg-elev); border-left: 1px solid var(--border); }
+  .project-side .project-meta { border-left: none; border-top: none; background: transparent; }
+  @media (max-width: 880px) { .project-side { border-left: none; border-top: 1px solid var(--border); } }
+  .shot { margin: clamp(18px, 2.4vw, 26px) clamp(18px, 2.4vw, 26px) 0; border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; background: #0B0F19; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  .shot-bar { height: 28px; display: flex; align-items: center; gap: 6px; padding: 0 10px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+  .shot-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.18); flex: none; }
+  .shot-bar em { font-style: normal; margin-left: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .shot-view { position: relative; height: 270px; overflow: hidden; }
+  .shot-view img { position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block; will-change: transform; }
+  .shot.play .shot-view img { animation: shotScroll var(--dur, 14s) ease-in-out infinite alternate; }
+  .shot:hover .shot-view img, .shot:focus-within .shot-view img { animation-play-state: paused; }
+  @keyframes shotScroll { 0%, 8% { transform: translateY(0); } 92%, 100% { transform: translateY(var(--dist, 0px)); } }
+  .shot-cap { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-dim); padding: 7px 10px; border-top: 1px solid var(--border); }
+  @media (prefers-reduced-motion: reduce) {
+    .shot-view { overflow-y: auto; }
+    .shot-view img { position: static; }
+    .shot.play .shot-view img { animation: none; }
+  }
+
+  /* EXPERIENCE: skill tags */
+  .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .stack-tag.soft { color: var(--primary); border-color: rgba(34, 197, 94, 0.32); }
+  .tag-legend { display: flex; gap: 10px; align-items: center; margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+  .tl-list li { margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -461,7 +487,7 @@
     <a href="#top" class="brand">abdirahman<b>.</b>dev</a>
     <nav class="nav-links">
       <a href="#projects">Projects</a>
-      <a href="#stack">Stack</a>
+      <a href="#stack">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -513,7 +539,7 @@
             <ul class="highlights"><li>Tenant isolation by school and role-based access for admins, teachers, students, and parents across 70 data models.</li><li>Grading, attendance, Qur'an memorization tracking, messaging, and PDF reports in daily use at Al Bayaan Institute.</li><li>Stripe billing with webhooks and reconciliation, plus SMS, email, and push notifications.</li><li>248 automated checks and Playwright end-to-end tests in GitHub Actions CI; deployed in Docker on Railway with Sentry.</li></ul>
             <div class="project-actions"><a class="link-btn primary" href="https://www.theilmquest.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a> <span class="link-btn" style="cursor:default;opacity:.75">Source private</span></div>
           </div>
-          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Production platform</dd></div><div class="meta-row"><dt>users</dt><dd>Admins · Teachers · Students · Parents</dd></div><div class="meta-row"><dt>testing</dt><dd>248 checks · Playwright</dd></div><div class="meta-row"><dt>ci</dt><dd>GitHub Actions</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">In production</span></dd></div></dl>
+          <div class="project-side"><figure class="shot" data-shot><div class="shot-bar"><i></i><i></i><i></i><em>theilmquest.com</em></div><div class="shot-view"><img src="assets/projects/ilmquest.jpg" width="900" height="4693" loading="lazy" alt="Homepage of theilmquest.com, scrolling top to bottom"></div><figcaption class="shot-cap">homepage · hover to pause</figcaption></figure><dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Production platform</dd></div><div class="meta-row"><dt>users</dt><dd>Admins · Teachers · Students · Parents</dd></div><div class="meta-row"><dt>testing</dt><dd>248 checks · Playwright</dd></div><div class="meta-row"><dt>ci</dt><dd>GitHub Actions</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">In production</span></dd></div></dl></div>
         </div>
       </article>
       <article class="project reveal">
@@ -526,7 +552,7 @@
             <ul class="highlights"><li>Public site for programs, curriculum levels, academic calendar, enrollment, donations, and contact.</li><li>Responsive, accessible component system built on Tailwind CSS and shadcn/ui.</li><li>Deployed on Vercel with the institute's custom domain.</li></ul>
             <div class="project-actions"><a class="link-btn primary" href="https://www.albayaaninstitute.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a></div>
           </div>
-          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Organization website</dd></div><div class="meta-row"><dt>audience</dt><dd>Families · Community</dd></div><div class="meta-row"><dt>hosting</dt><dd>Vercel</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl>
+          <div class="project-side"><figure class="shot" data-shot><div class="shot-bar"><i></i><i></i><i></i><em>albayaaninstitute.com</em></div><div class="shot-view"><img src="assets/projects/albayaan.jpg" width="900" height="1856" loading="lazy" alt="Homepage of albayaaninstitute.com, scrolling top to bottom"></div><figcaption class="shot-cap">homepage · hover to pause</figcaption></figure><dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Organization website</dd></div><div class="meta-row"><dt>audience</dt><dd>Families · Community</dd></div><div class="meta-row"><dt>hosting</dt><dd>Vercel</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl></div>
         </div>
       </article>
       <article class="project reveal">
@@ -534,12 +560,12 @@
           <div class="project-content">
             <span class="project-tag">03</span>
             <h3 class="project-title">NoorHub</h3>
-            <p class="project-sub">Gamified missions and rewards app for students</p>
+            <p class="project-sub">Classroom gamification for the modern dugsi</p>
             <div class="stack-tags"><span class="stack-tag">TanStack Start</span><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">MongoDB</span><span class="stack-tag">Tailwind CSS</span></div>
-            <ul class="highlights"><li>Rank-gated missions in knowledge, Qur'an, character, and physical categories that students submit for teacher review.</li><li>In-app currency, a snack-shop store, and class leaderboards that reward effort and consistency.</li><li>Session auth with CSRF protection, server API routes on MongoDB, and 41 automated test files.</li></ul>
-            <div class="project-actions"><span class="link-btn" style="cursor:default;opacity:.75">Internal tool · private</span></div>
+            <ul class="highlights"><li>Students browse Missions with Meeqat timers, submit their work, and earn rewards once a teacher marks it Maqbool (accepted).</li><li>Eight ranks of Irtifa to climb, class leaderboards, and Dugsi Bucks spent on real rewards in the Snack Shop.</li><li>Separate student and staff logins with CSRF-protected sessions, server API routes on MongoDB, and 41 automated test files.</li></ul>
+            <div class="project-actions"><a class="link-btn primary" href="https://www.noorhub.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a></div>
           </div>
-          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Internal tool</dd></div><div class="meta-row"><dt>users</dt><dd>Students · Teachers</dd></div><div class="meta-row"><dt>stack</dt><dd>TanStack · Mongo</dd></div><div class="meta-row"><dt>tests</dt><dd>41 test files</dd></div><div class="meta-row"><dt>status</dt><dd>Used at Al Bayaan</dd></div></dl>
+          <div class="project-side"><figure class="shot" data-shot><div class="shot-bar"><i></i><i></i><i></i><em>noorhub.com</em></div><div class="shot-view"><img src="assets/projects/noorhub.jpg" width="900" height="698" loading="lazy" alt="Homepage of noorhub.com, scrolling top to bottom"></div><figcaption class="shot-cap">homepage · hover to pause</figcaption></figure><dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Classroom gamification</dd></div><div class="meta-row"><dt>users</dt><dd>Students · Teachers</dd></div><div class="meta-row"><dt>stack</dt><dd>TanStack · Mongo</dd></div><div class="meta-row"><dt>tests</dt><dd>41 test files</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl></div>
         </div>
       </article>
       <article class="project reveal">
@@ -552,7 +578,7 @@
             <ul class="highlights"><li>Responsive, mobile-first site for a local driving school with clear course and road-test information.</li><li>Modular components and CSS animations with consistent branding.</li><li>Search-optimized metadata and sitemap for local discovery.</li></ul>
             <div class="project-actions"><a class="link-btn primary" href="https://motiondriversed.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live site</a> <a class="link-btn" href="https://github.com/abdirxhmxn/motionDriversEd" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.240-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg> Source</a></div>
           </div>
-          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Client website</dd></div><div class="meta-row"><dt>stack</dt><dd>Vanilla JS</dd></div><div class="meta-row"><dt>focus</dt><dd>SEO · mobile</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl>
+          <div class="project-side"><figure class="shot" data-shot><div class="shot-bar"><i></i><i></i><i></i><em>motiondriversed.com</em></div><div class="shot-view"><img src="assets/projects/motion.jpg" width="900" height="4922" loading="lazy" alt="Homepage of motiondriversed.com, scrolling top to bottom"></div><figcaption class="shot-cap">homepage · hover to pause</figcaption></figure><dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Client website</dd></div><div class="meta-row"><dt>stack</dt><dd>Vanilla JS</dd></div><div class="meta-row"><dt>focus</dt><dd>SEO · mobile</dd></div><div class="meta-row"><dt>status</dt><dd><span style="color:var(--primary)">Live</span></dd></div></dl></div>
         </div>
       </article>
       <article class="project reveal">
@@ -562,10 +588,10 @@
             <h3 class="project-title">Bet on Me</h3>
             <p class="project-sub">Team project · DevOps &amp; project management</p>
             <div class="stack-tags"><span class="stack-tag">EJS</span><span class="stack-tag">Node.js</span><span class="stack-tag">Passport.js</span><span class="stack-tag">MongoDB</span><span class="stack-tag">Git</span></div>
-            <ul class="highlights"><li>Group habit-building app: members join clusters, set habit goals and deadlines, and stake points on following through.</li><li>Served as DevOps PM: owned the deployment pipeline and the team's Git workflow.</li><li>Enforced branching conventions, reviewed pull requests, and resolved merge conflicts for the team.</li></ul>
+            <ul class="highlights"><li>Group accountability app: members join groups of up to 8, set habit goals, and put money on following through, with misses paying into a shared money jar.</li><li>Served as DevOps PM: owned the deployment pipeline and the team's Git workflow.</li><li>Enforced branching conventions, reviewed pull requests, and resolved merge conflicts for the team.</li></ul>
             <div class="project-actions"><a class="link-btn" href="https://github.com/Resilient-Labs/bet-on-me" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.240-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg> Source</a></div>
           </div>
-          <dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Team project</dd></div><div class="meta-row"><dt>role</dt><dd>DevOps PM</dd></div><div class="meta-row"><dt>stack</dt><dd>EJS · Passport · Mongo</dd></div><div class="meta-row"><dt>where</dt><dd>Resilient Coders</dd></div></dl>
+          <div class="project-side"><figure class="shot" data-shot><div class="shot-bar"><i></i><i></i><i></i><em>bet-on-me (rendered from source)</em></div><div class="shot-view"><img src="assets/projects/betonme.jpg" width="900" height="1162" loading="lazy" alt="Homepage of bet-on-me (rendered from source), scrolling top to bottom"></div><figcaption class="shot-cap">homepage · hover to pause</figcaption></figure><dl class="project-meta"><div class="meta-row"><dt>type</dt><dd>Team project</dd></div><div class="meta-row"><dt>role</dt><dd>DevOps PM</dd></div><div class="meta-row"><dt>stack</dt><dd>EJS · Passport · Mongo</dd></div><div class="meta-row"><dt>where</dt><dd>Resilient Coders</dd></div></dl></div>
         </div>
       </article>
     </div>
@@ -574,26 +600,33 @@
 
 <section class="section" id="stack">
   <div class="container">
-    <div class="section-head reveal"><div class="eyebrow">// stack</div><h2 class="section-title">What I work with</h2></div>
+    <div class="section-head reveal"><div class="eyebrow">// skills</div><h2 class="section-title">Technical to human: what I bring</h2></div>
     <div class="stack-grid reveal">
       <div class="stack-cat"><h3>Languages</h3><ul><li>JavaScript (ES6+)</li><li>TypeScript</li><li>Python</li><li>Java</li><li>HTML &amp; CSS</li></ul></div>
-      <div class="stack-cat"><h3>Frameworks</h3><ul><li>Node.js &amp; Express</li><li>React &amp; Next.js</li><li>React Native (Expo)</li><li>TanStack Start</li><li>Tailwind CSS</li></ul></div>
-      <div class="stack-cat"><h3>Data &amp; APIs</h3><ul><li>MongoDB &amp; Mongoose</li><li>REST APIs</li><li>Stripe</li><li>Socket.io</li><li>Google Apps Script</li></ul></div>
-      <div class="stack-cat"><h3>Tools &amp; Practices</h3><ul><li>GitHub Actions CI</li><li>Playwright</li><li>Docker · Railway · Vercel</li><li>Sentry</li><li>Claude Code</li></ul></div>
+      <div class="stack-cat"><h3>Frontend &amp; Mobile</h3><ul><li>React &amp; Next.js</li><li>React Native (Expo)</li><li>TanStack Start &amp; Vite</li><li>Tailwind CSS &amp; shadcn/ui</li><li>EJS server rendering</li></ul></div>
+      <div class="stack-cat"><h3>Backend &amp; Data</h3><ul><li>Node.js &amp; Express</li><li>MongoDB &amp; Mongoose</li><li>REST APIs &amp; Socket.io</li><li>Prisma ORM</li><li>Stripe, SendGrid, Cloudinary</li></ul></div>
+      <div class="stack-cat"><h3>Security &amp; Reliability</h3><ul><li>Multi-tenant data isolation</li><li>Role-based access control</li><li>Sessions, CSRF, CSP, rate limiting</li><li>Sentry error tracking</li><li>Privacy-first data handling</li></ul></div>
+      <div class="stack-cat"><h3>Testing &amp; DevOps</h3><ul><li>Playwright end-to-end tests</li><li>GitHub Actions CI</li><li>Docker · Railway · Vercel · Render</li><li>Manual QA &amp; regression testing</li><li>Jira &amp; Kanban</li></ul></div>
+      <div class="stack-cat"><h3>AI-Assisted Building</h3><ul><li>Claude Code</li><li>Writing agent specs &amp; rules</li><li>Reviewing &amp; testing AI output</li><li>De-identified data analysis</li><li>Google Apps Script automation</li></ul></div>
+      <div class="stack-cat"><h3>Leadership &amp; Teaching</h3><ul><li>Founded &amp; grew a 110+ student program</li><li>Hiring, onboarding &amp; coaching staff</li><li>Curriculum design</li><li>Training non-technical users</li><li>Mentoring students</li></ul></div>
+      <div class="stack-cat"><h3>Communication</h3><ul><li>Explaining tech in plain language</li><li>Working with families &amp; clients</li><li>Clear documentation &amp; runbooks</li><li>Code review feedback</li><li>Accurate care documentation</li></ul></div>
+      <div class="stack-cat"><h3>Judgment &amp; Care</h3><ul><li>Knowing when not to build</li><li>Keeping people in AI decisions</li><li>Protecting children's data</li><li>Patience &amp; empathy (DSP work)</li><li>Reliability under pressure</li></ul></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="experience">
   <div class="container">
-    <div class="section-head reveal"><div class="eyebrow">// experience</div><h2 class="section-title">Where I've been working</h2></div>
+    <div class="section-head reveal"><div class="eyebrow">// experience</div><h2 class="section-title">Where I've been working</h2>
+      <div class="tag-legend"><span class="stack-tag">technical</span><span class="stack-tag soft">soft skill</span></div></div>
     <div class="timeline reveal">
-      <div class="tl-item current"><div class="tl-meta">SEP 2024 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Al Bayaan Institute</h3><div class="tl-role">Founder &amp; Lead Instructor</div><ul class="tl-list"><li>Founded and grew a community education program from 3 to 110+ students.</li><li>Train and onboard staff on procedures and technology, including IlmQuest and NoorHub.</li><li>Replaced paper and spreadsheet grading with IlmQuest, cutting administrative workload by about 70%.</li></ul></div>
-      <div class="tl-item current"><div class="tl-meta">SEP 2025 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Freelance</h3><div class="tl-role">Web Developer</div><ul class="tl-list"><li>Built and deployed motiondriversed.com for a Lewiston, ME driving school.</li><li>Built booking-site prototypes for local businesses with Next.js, Prisma, and Stripe.</li></ul></div>
-      <div class="tl-item"><div class="tl-meta">AUG 2025 — DEC 2025 · REMOTE</div><h3 class="tl-title">Resilient Coders</h3><div class="tl-role">Full-Stack Software Engineer</div><ul class="tl-list"><li>Built MERN-stack applications in Agile sprints, including JWT-authenticated REST APIs and reusable React components.</li><li>Reviewed 10+ teammate pull requests; DevOps PM on Bet on Me.</li></ul></div>
-      <div class="tl-item"><div class="tl-meta">FEB 2024 — AUG 2024 · PORTLAND, ME</div><h3 class="tl-title">Northeast Residential Services</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Supported clients under individualized care plans; kept accurate documentation and administered medications under strict procedures.</li></ul></div>
-      <div class="tl-item"><div class="tl-meta">SEP 2021 — AUG 2022 · SCARBOROUGH, ME</div><h3 class="tl-title">Creative Works</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Followed individualized care plans and safety procedures; administered medications and kept accurate client documentation.</li></ul></div>
-      <div class="tl-item"><div class="tl-meta">MAY 2025 · PORTLAND, ME</div><h3 class="tl-title">University of Southern Maine</h3><div class="tl-role">B.S. Computer Science</div><ul class="tl-list"><li>Coursework: Data Structures, Algorithms, Operating Systems, Artificial Intelligence, Systems Programming, Web Development.</li></ul></div>
+      <div class="tl-item current"><div class="tl-meta">SEP 2024 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Al Bayaan Institute</h3><div class="tl-role">Founder &amp; Lead Instructor</div><ul class="tl-list"><li>Founded a community education program and grew it from 3 to 110+ students across Prep, Grades 1–5, and Tahfidh and Khatm tracks.</li><li>Design curriculum in Qur'an, Tajwid, Fiqh, Sirah, and Islamic writing, and teach classes directly.</li><li>Hire, train, and onboard every staff member; coach them on instructional procedures and technology, and troubleshoot as workflows change.</li><li>Scoped, built, and rolled out IlmQuest from staff pain points with paper and spreadsheets, cutting administrative workload by about 70%.</li><li>Built NoorHub to motivate students with missions, ranks, and rewards, and the institute's public website for families.</li><li>Automated attendance and reporting with Google Sheets and Apps Script, reducing manual data entry by about 80%.</li><li>Use Claude on de-identified attendance and grade data to give leadership evidence while keeping decisions about students with people.</li><li>Communicate with families through progress reports and the parent portal, and run enrollment, scheduling, and tuition tracking.</li></ul><div class="tl-tags"><span class="stack-tag">Node.js</span><span class="stack-tag">MongoDB</span><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Apps Script</span><span class="stack-tag">Claude Code</span><span class="stack-tag soft">Leadership</span><span class="stack-tag soft">Teaching</span><span class="stack-tag soft">Staff training</span><span class="stack-tag soft">Family communication</span><span class="stack-tag soft">Operations</span><span class="stack-tag soft">Decision-making</span></div></div>
+      <div class="tl-item current"><div class="tl-meta">SEP 2025 — PRESENT · PORTLAND, ME</div><h3 class="tl-title">Freelance</h3><div class="tl-role">Web Developer</div><ul class="tl-list"><li>Built and deployed motiondriversed.com, a responsive, search-optimized site for a Lewiston, ME driving school.</li><li>Built booking-site prototypes for local businesses in Next.js, React, Tailwind, Prisma, and Stripe, with a slot engine that prevents double-booking, card holds, and a password-protected owner dashboard.</li><li>Diagnosed a bug where Next.js bundled API routes and pages into separate module graphs, splitting an in-memory store; fixed it and added write-then-read checks.</li><li>On a law-firm concept site, disabled the live intake form and added a concept banner so someone facing an appeal deadline couldn't mistake the demo for the real firm.</li><li>Removed AI-drafted testimonials from a prototype and kept only the business's real public rating.</li><li>Write launch runbooks so owners can take over hosting, payments, and content.</li></ul><div class="tl-tags"><span class="stack-tag">Next.js</span><span class="stack-tag">React</span><span class="stack-tag">Tailwind</span><span class="stack-tag">Prisma</span><span class="stack-tag">Stripe</span><span class="stack-tag">Vercel</span><span class="stack-tag soft">Client communication</span><span class="stack-tag soft">Scoping</span><span class="stack-tag soft">Debugging</span><span class="stack-tag soft">Ethical judgment</span><span class="stack-tag soft">Handoff</span></div></div>
+      <div class="tl-item"><div class="tl-meta">AUG 2025 — DEC 2025 · REMOTE</div><h3 class="tl-title">Resilient Coders</h3><div class="tl-role">Full-Stack Software Engineer</div><ul class="tl-list"><li>Built and deployed MERN-stack applications in Agile sprints, including JWT-authenticated REST APIs and reusable React components.</li><li>Reviewed 10+ teammate pull requests on GitHub and kept code standards consistent.</li><li>Served as DevOps PM on Bet on Me: owned the deployment pipeline, branching conventions, the PR workflow, and merge-conflict resolution for the team.</li></ul><div class="tl-tags"><span class="stack-tag">React</span><span class="stack-tag">Node.js</span><span class="stack-tag">Express</span><span class="stack-tag">MongoDB</span><span class="stack-tag">JWT</span><span class="stack-tag">Git</span><span class="stack-tag soft">Teamwork</span><span class="stack-tag soft">Code review</span><span class="stack-tag soft">Project management</span><span class="stack-tag soft">Agile</span></div></div>
+      <div class="tl-item"><div class="tl-meta">FEB 2024 — AUG 2024 · PORTLAND, ME</div><h3 class="tl-title">Northeast Residential Services</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Supported clients under individualized care plans, organizational procedures, and safety requirements.</li><li>Administered medications following prescribed instructions and strict documentation procedures.</li><li>Kept accurate client records and communicated changes to supervisors and the care team for continuity of care.</li></ul><div class="tl-tags"><span class="stack-tag">Documentation</span><span class="stack-tag soft">Empathy</span><span class="stack-tag soft">Attention to detail</span><span class="stack-tag soft">Reliability</span><span class="stack-tag soft">Care-team communication</span></div></div>
+      <div class="tl-item"><div class="tl-meta">SEP 2021 — AUG 2022 · SCARBOROUGH, ME</div><h3 class="tl-title">Creative Works</h3><div class="tl-role">Direct Support Professional</div><ul class="tl-list"><li>Followed individualized care plans and safety procedures; administered medications and kept accurate client documentation.</li><li>Balanced direct support work with computer science studies.</li></ul><div class="tl-tags"><span class="stack-tag">Documentation</span><span class="stack-tag soft">Patience</span><span class="stack-tag soft">Responsibility</span><span class="stack-tag soft">Time management</span><span class="stack-tag soft">Empathy</span></div></div>
+      <div class="tl-item"><div class="tl-meta">MAY 2022 — AUG 2022 · REMOTE</div><h3 class="tl-title">Lingocard</h3><div class="tl-role">Manual QA Intern</div><ul class="tl-list"><li>Designed and ran 50+ positive and negative test cases, completed up to 70 regression test cases, and performed smoke testing on a cross-platform app.</li><li>Ran exploratory testing, built QA checklists for core features, and tracked and verified bug fixes in Jira using Kanban.</li></ul><div class="tl-tags"><span class="stack-tag">Jira</span><span class="stack-tag">Kanban</span><span class="stack-tag">Regression testing</span><span class="stack-tag soft">Attention to detail</span><span class="stack-tag soft">Collaboration</span></div></div>
+      <div class="tl-item"><div class="tl-meta">MAY 2025 · PORTLAND, ME</div><h3 class="tl-title">University of Southern Maine</h3><div class="tl-role">B.S. Computer Science</div><ul class="tl-list"><li>Coursework: Data Structures, Algorithms, Operating Systems, Artificial Intelligence, Systems Programming, Computer Architecture, Web Development.</li><li>Team software engineering project (COS 420): Child Immunizations.</li></ul><div class="tl-tags"><span class="stack-tag">Java</span><span class="stack-tag">Python</span><span class="stack-tag soft">Teamwork</span></div></div>
     </div>
   </div>
 </section>
@@ -621,6 +654,13 @@
 (function nav(){const n=document.getElementById('nav');const f=()=>n.classList.toggle('scrolled',window.scrollY>8);document.addEventListener('scroll',f,{passive:true});f();})();
 (function reveal(){const els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
 const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});els.forEach(e=>io.observe(e));})();
+(function shots(){const list=[...document.querySelectorAll('[data-shot]')];
+const setup=f=>{const v=f.querySelector('.shot-view'),i=f.querySelector('img');const d=i.clientHeight-v.clientHeight;
+if(d<=4){f.style.setProperty('--dist','0px');return;}f.style.setProperty('--dist',(-d)+'px');f.style.setProperty('--dur',Math.max(6,d/70).toFixed(1)+'s');};
+list.forEach(f=>{const i=f.querySelector('img');if(i.complete)setup(f);else i.addEventListener('load',()=>setup(f));});
+window.addEventListener('resize',()=>list.forEach(setup));
+if(!('IntersectionObserver' in window)){list.forEach(f=>f.classList.add('play'));return;}
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('play',e.isIntersecting)),{threshold:0.25});list.forEach(f=>io.observe(f));})();
 document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
